@@ -1,0 +1,50 @@
+version: '3'
+services:
+  snapdrop:
+    image: linuxserver/snapdrop
+    restart: unless-stopped
+    ports:
+      - 9091:80
+  chatgpt-tg:
+    image: ghcr.io/m1guelpf/chatgpt-telegram
+    container_name: chatgpt-tg
+    network_mode: host
+    volumes:
+      # your ".config" local folder must include a "chatgpt.json" file
+      - ./var/chatgpt-tg/.config/:/root/.config
+    environment:
+      - TELEGRAM_ID=5796127855
+      - TELEGRAM_TOKEN=5708231694:AAGHksxWj9t7VovSYpW40BqBtLA4sWE33OA
+  code-server:
+    image: linuxserver/code-server
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - PASSWORD=passwd #optional
+      - HASHED_PASSWORD= #optional
+      - SUDO_PASSWORD=021925 #optional
+      - SUDO_PASSWORD_HASH= #optional
+      - PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /var/code-server/config:/config
+    ports:
+      - 9092:8443
+    restart: unless-stopped
+
+  techxuexi:
+    image: mine/techxuexi:dev4
+    restart: unless-stopped
+    volumes: 
+      - ./var/xuexi:/xuexi/user
+      - ./log/xuexi:/var/log
+    shm_size: 2gb
+    network_mode: host
+    environment:
+      - CRONTIME=30 7-23/8 * * *
+      - Pushmode=5
+      - AccessToken=6009813390:AAFsUJFI2_aM46gUoX58fsvFaIppVbI2oZA
+      - Secret=5796127855
+      - Scheme=https://techxuexi.js.org/jump/techxuexi-20211023.html?
