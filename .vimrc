@@ -72,3 +72,13 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
+
+set sw=4
+set ts=4
+
+filetype indent on
+autocmd FileType python setlocal et sta sw=4 sts=4
+
+set smartindent
+set cindent
+set encoding=utf-8 fileencodings=utf-8
