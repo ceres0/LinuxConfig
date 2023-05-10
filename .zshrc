@@ -1,5 +1,6 @@
 # 如果没有antigen则自动安装
 INSTALL_DIR="/usr/share"
+APT_BIN_DIR="/usr/bin"
 BIN_DIR="/usr/local/bin"
 ANTIGEN=".antigen.zsh"
 
@@ -26,7 +27,10 @@ setopt prompt_subst
 PROMPT='❰%{$fg[green]%}%n%{$reset_color%}|%{$fg[yellow]%}%1~%{$reset_color%}%{$fg[blue]%}$(git branch --show-current 2&> /dev/null | xargs -I branch echo "(branch)")%{$reset_color%}❱ '
 # bindkey '^n' autosuggest-accept
 # alias python='python3'
-
+if [ ! -f "$APT_BIN_DIR/neofetch" ]; then
+	sudo apt install neofetch
+fi
+neofetch
 if [ ! -f "$BIN_DIR/pokemonsay" ]; then
 	if [ ! -d "$INSTALL_DIR/cowsay" ]; then
 	       sudo apt install cowsay
