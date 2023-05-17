@@ -1,7 +1,8 @@
 # 如果没有antigen则自动安装
 INSTALL_DIR="/usr/share"
-BIN_DIR="/usr/local/bin"
-ANTIGEN=".antigen.zsh"
+LOCAL_BIN_DIR="/usr/local/bin"
+BIN_DIR="/usr/bin"
+ANTIGEN="$HOME/.antigen.zsh"
 
 if [ ! -f "$ANTIGEN" ]; then
 	sudo curl -L git.io/antigen > "$ANTIGEN"
@@ -27,7 +28,7 @@ PROMPT='❰%{$fg[green]%}%n%{$reset_color%}|%{$fg[yellow]%}%1~%{$reset_color%}%{
 # bindkey '^n' autosuggest-accept
 # alias python='python3'
 
-if [ ! -f "$BIN_DIR/pokemonsay" ]; then
+if [ ! -f "$LOCAL_BIN_DIR/pokemonsay" ]; then
 	if [ ! -d "$INSTALL_DIR/cowsay" ]; then
 	       sudo apt install cowsay
 	fi
@@ -41,4 +42,8 @@ fi
 if [ ! -f "/usr/games/fortune" ]; then
        sudo apt install fortune
 fi
+if [ ! -f "$BIN_DIR/neofetch" ]; then
+	sudo apt install neofetch
+fi
+neofetch
 fortune | pokemonsay
