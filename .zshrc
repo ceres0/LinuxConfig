@@ -1,14 +1,8 @@
 # 如果没有antigen则自动安装
 INSTALL_DIR="/usr/share"
-<<<<<<< HEAD
 LOCAL_BIN_DIR="/usr/local/bin"
 BIN_DIR="/usr/bin"
 ANTIGEN="$HOME/.antigen.zsh"
-=======
-APT_BIN_DIR="/usr/bin"
-BIN_DIR="/usr/local/bin"
-ANTIGEN=".antigen.zsh"
->>>>>>> 87838d17d2f147e3abcc8535b7da67be6a3c088f
 
 if [ ! -f "$ANTIGEN" ]; then
 	sudo curl -L git.io/antigen > "$ANTIGEN"
